@@ -25,18 +25,24 @@ ChartJS.register(
   Filler
 );
 
-export default function BarChart() {
+interface ChartData {
+  labels: string[];
+  datasets: number[];
+}
+
+interface BarChartProps {
+  data: ChartData;
+}
+
+export default function BarChart({ data }: BarChartProps) {
   const { resolvedTheme } = useTheme();
 
-  const labels = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug"];
-  const datasets = [12, 45, 67, 43, 89, 34, 67, 43];
-  const data = {
-    labels: labels,
+  const chartData = {
+    labels: data.labels,
     datasets: [
       {
-        // Title of Graph
         label: "میزان فروش ماهانه",
-        data: datasets,
+        data: data.datasets,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(255, 159, 64, 0.2)",
@@ -61,9 +67,9 @@ export default function BarChart() {
         barPercentage: 0.8,
         borderRadius: 5,
       },
-      // insert similar in dataset object for making multi bar chart
     ],
   };
+
   const options = {
     maintainAspectRatio: false,
     responsive: true,
@@ -120,9 +126,10 @@ export default function BarChart() {
       },
     },
   };
+
   return (
     <div className="w-full max-w-3xl h-72 rounded-lg p-4 shadow-lg bg-white dark:bg-gray-800">
-      <Bar data={data} options={options} />
+      <Bar data={chartData} options={options} />
     </div>
   );
 }

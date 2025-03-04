@@ -6,14 +6,23 @@ import { useTheme } from "next-themes";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function PieChart() {
+interface ChartData {
+  labels: string[];
+  datasets: number[];
+}
+
+interface PieChartProps {
+  data: ChartData;
+}
+
+export default function PieChart({ data }: PieChartProps) {
   const { resolvedTheme } = useTheme();
 
-  const data = {
-    labels: ["فروش آنلاین", "فروش حضوری", "فروش تلفنی", "فروش عمده"],
+  const chartData = {
+    labels: data.labels,
     datasets: [
       {
-        data: [300, 150, 100, 200],
+        data: data.datasets,
         backgroundColor: [
           "rgba(255, 99, 132, 0.8)",
           "rgba(54, 162, 235, 0.8)",
@@ -55,7 +64,7 @@ export default function PieChart() {
 
   return (
     <div className="w-full max-w-md rounded-lg p-4 shadow-lg bg-white dark:bg-gray-800 h-72">
-      <Pie data={data} options={options} />
+      <Pie data={chartData} options={options} />
     </div>
   );
 }
