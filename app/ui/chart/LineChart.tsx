@@ -27,7 +27,10 @@ ChartJS.register(
 
 interface ChartData {
   labels: string[];
-  datasets: number[];
+  datasets: {
+    label: string;
+    data: number[];
+  }[];
 }
 
 interface LineChartProps {
@@ -37,12 +40,16 @@ interface LineChartProps {
 export default function LineChart({ data }: LineChartProps) {
   const { resolvedTheme } = useTheme();
 
+  if (!data?.datasets?.length) {
+    return null;
+  }
+
   const chartData = {
     labels: data.labels,
     datasets: [
       {
-        label: "میزان فروش ماهانه",
-        data: data.datasets,
+        label: data.datasets[0].label,
+        data: data.datasets[0].data,
         fill: true,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgb(75, 192, 192)",
@@ -63,7 +70,7 @@ export default function LineChart({ data }: LineChartProps) {
       },
       title: {
         display: true,
-        text: "نمودار فروش ماهانه",
+        text: data.datasets[0].label,
         font: {
           size: 16,
         },

@@ -1,4 +1,5 @@
 import SideNav from "../ui/SideNav";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,6 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <div className="flex-grow p-6 md:overflow-y-auto ">
         <div className="max-w-7xl mx-auto">{children}</div>
+        <Toaster />
       </div>
     </div>
   );
