@@ -143,7 +143,11 @@ export default function Page() {
         <PieChartForSocial />
         <BarChartForSocial />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-1000 ${
+          fadeIn ? "opacity-100" : "opacity-0"
+        }`}
+      >
         {statistics && <StatisticsCard statistics={statistics} />}
       </div>
     </div>
