@@ -41,16 +41,12 @@ export default function Page() {
 
   const fetchSales = async (range: string) => {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-        ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-        : "";
-      const res = await fetch(`${baseUrl}/api/sales?range=${range}`);
+      const res = await fetch(`/api/sales?range=${range}`);
       if (!res.ok) {
         toast.error("خطا در دریافت داده‌های فروش");
         throw new Error("خطا در دریافت داده‌های فروش");
       }
       const rawData = await res.json();
-      console.log("API Response:", { baseUrl, rawData });
 
       // اطمینان از وجود داده‌ها
       if (!rawData?.salesData?.labels || !rawData?.salesData?.datasets) {

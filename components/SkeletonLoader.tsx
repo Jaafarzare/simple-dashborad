@@ -1,7 +1,3 @@
-// components/DashboardSkeleton.tsx
-
-import React from "react";
-
 export function DashboardSkeleton() {
   return (
     <div className="flex flex-col gap-6">

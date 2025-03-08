@@ -62,15 +62,14 @@ export async function GET(request: NextRequest) {
     );
     const averageSales = totalSales / salesData.datasets[0].data.length;
 
-    return new NextResponse(
-      JSON.stringify({
+    return NextResponse.json(
+      {
         statistics: { totalSales, averageSales },
         salesData: filteredData,
-      }),
+      },
       {
         status: 200,
         headers: {
-          "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "GET, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type",
